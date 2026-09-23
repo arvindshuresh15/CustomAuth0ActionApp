@@ -1,0 +1,8 @@
+<%- include('partials/header') -%>
+ <section class="surface notice">
+	 <div class="eyebrow">Something needs attention</div>
+	 <h1><%= error.status || "ERROR" %>: <%= message || "Error" %></h1>
+	 <p class="muted">Return home and try the request again.</p>
+	 <a class="button button-primary" href="/">Return home</a>
+ </section>
+<%- include('partials/footer') -%>

@@ -1,0 +1,31 @@
+<%- include('partials/header') -%>
+
+
+
+
+<section class="surface hero">
+   <div>
+      <div class="eyebrow">Identity, made tangible</div>
+      <h1>Your account, in one clear view.</h1>
+      <p>Explore the essentials of an Auth0-powered account: profile details, protected resources, roles, and secure account actions.</p>
+      <div class="actions">
+         <% if (locals.isAuthenticated) { %>
+            <a class="button button-primary" href="/profile">Open your profile</a>
+            <a class="button button-secondary" href="/rocksuser">Visit AuthRocks</a>
+         <% } else { %>
+            <a class="button button-primary" href="/login">Log in to continue</a>
+            <a class="button button-secondary" href="https://github.com/auth0/express-openid-connect" target="_blank" rel="noreferrer">View the project</a>
+         <% } %>
+      </div>
+   </div>
+   <aside class="hero-aside">
+      <div class="eyebrow">What is inside</div>
+      <strong>Profile controls</strong>
+      <p class="muted">Update contact details, manage MFA, change your password, and inspect the claims returned for your session.</p>
+   </aside>
+</section>
+
+
+
+
+<%- include('partials/footer') -%>

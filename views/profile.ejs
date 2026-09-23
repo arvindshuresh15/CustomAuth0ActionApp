@@ -1,0 +1,90 @@
+<%- include('partials/header') -%>
+
+<section class="surface profile-header">
+  <% if (user.picture) { %>
+    <img src="<%= user.picture %>" class="avatar" alt="Profile photo for <%= user.nickname || user.name || 'your account' %>">
+  <% } else { %>
+    <div class="avatar avatar-fallback" aria-hidden="true"><%= (user.nickname || user.name || user.email || 'A').charAt(0).toUpperCase() %></div>
+  <% } %>
+  <div>
+    <div class="eyebrow">Account overview</div>
+    <h1>Welcome, <%= user.nickname || user.name || 'there' %>.</h1>
+    <p class="muted">Manage your personal details and security preferences.</p>
+  </div>
+</section>
+
+<div class="profile-grid">
+  <section class="surface panel">
+    <h2>Contact details</h2>
+    <p class="panel-intro">Your verified identity information.</p>
+    <span class="field-label">Email</span>
+    <div class="field-value"><%= user.email || 'No email set' %></div>
+    <a class="button button-secondary" href="/update-email">Update email securely</a>
+    <span class="field-label" style="margin-top: 18px">Phone number</span>
+    <div class="field-value"><%= user.phone_number || 'No phone number set' %></div>
+    <a class="button button-secondary" href="/update-phone-number">Update phone number</a>
+  </section>
+
+  <section class="surface panel">
+    <h2>Address</h2>
+    <p class="panel-intro">Keep your account information current.</p>
+    <span class="field-label">Saved address</span>
+    <div class="field-value"><%= user.usersAddress || 'No address set' %></div>
+    <a class="button button-primary" href="/update-address">Update address</a>
+    <span class="field-label" style="margin-top: 30px">Account email</span>
+    <div class="field-value"><%= user.email || 'No email set' %></div>
+  </section>
+
+  <section class="surface panel">
+    <h2>Change email with verification</h2>
+    <p class="panel-intro">Start with a new address, then verify the one-time code.</p>
+    <form action="/new-update-email" method="POST">
+      <label class="field-label" for="new-email">New email</label>
+      <div class="form-row">
+        <input id="new-email" type="email" name="email" value="<%= user.email || '' %>" required>
+        <button class="button button-primary" type="submit">Send code</button>
+      </div>
+    </form>
+    <form action="/verifyotp" method="POST" style="margin-top: 18px">
+      <label class="field-label" for="verify-email">Email to verify</label>
+      <input id="verify-email" type="email" name="email" placeholder="you@example.com" required>
+      <label class="field-label" for="otp" style="margin-top: 14px">Verification code</label>
+      <div class="form-row">
+        <input id="otp" type="text" inputmode="numeric" name="otp" placeholder="Enter your code" required>
+        <button class="button button-secondary" type="submit">Verify email</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="surface panel">
+    <h2>Security and access</h2>
+    <p class="panel-intro">Keep your account protected and share access when needed.</p>
+    <div class="actions" style="margin-top: 0">
+      <a class="button button-secondary" href="/update-mfa">Manage MFA</a>
+      <a class="button button-secondary" href="/update-password">Change password</a>
+      <a class="button button-secondary" href="/invite-user">Invite a user</a>
+      <a class="button button-secondary" href="/test">Test flag</a>
+      <a class="button button-secondary" href="/update-mfa-preference-to-false">Disable MFA preference</a>
+      <a class="button button-primary" href="/update-mfa-preference-to-true">Enable MFA preference</a>
+    </div>
+  </section>
+
+  <section class="surface panel full-panel">
+    <div class="section-heading">
+      <div>
+        <h2>Session details</h2>
+        <p class="panel-intro" style="margin-bottom: 0">Useful while developing and testing claims.</p>
+      </div>
+    </div>
+    <details class="details">
+      <summary>View profile data</summary>
+      <pre><%= userProfile %></pre>
+    </details>
+    <details class="details">
+      <summary>View token data</summary>
+      <pre><%= token %></pre>
+    </details>
+  </section>
+</div>
+
+<%- include('partials/footer') -%>

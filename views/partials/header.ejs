@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title><%= locals.title || "AuthRocks" %></title>
+ <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+     <header class="site-header">
+         <nav class="nav-shell" aria-label="Primary navigation">
+             <a class="brand" href="/">
+                 <span class="brand-mark" aria-hidden="true">
+                     <svg viewBox="0 0 152 168" xmlns="http://www.w3.org/2000/svg"><path d="M119.127 135.861 102.277 83.997l44.107-32.045H91.863L75.011.09h54.525l16.855 51.861.014-.013c9.79 30.092-.292 64.318-27.278 83.923ZM30.893 135.861l44.105 32.063 44.129-32.062-44.115-32.054-44.119 32.053ZM3.624 51.939c-10.304 31.721 1.657 65.333 27.26 93.928l16.856-51.877L3.642 51.951H58.15L75.003.089l.004-.014H20.474L3.624 51.939Z"/></svg>
+                 </span>
+                 <span class="brand-copy">AuthRocks<small>Identity playground</small></span>
+             </a>
+             <div class="nav-links">
+                 <a href="/">Home</a>
+                 <% if (locals.user) { %>
+                     <a href="/profile">Profile</a>
+                     <a href="/rocksuser">AuthRocks</a>
+                     <a href="/requiredrole">Role check</a>
+                     <a href="/logout" class="nav-cta">Log out</a>
+                 <% } else { %>
+                     <a href="/login" class="nav-cta">Log in</a>
+                 <% } %>
+             </div>
+         </nav>
+     </header>
+     <main class="page-shell">
